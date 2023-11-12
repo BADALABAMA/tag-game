@@ -1,0 +1,91 @@
+@import './variables.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background: $primary-bg;
+}
+
+.spinner {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  background: linear-gradient($primary-bg, $secondary-bg, $third-bg);
+  border: 2px solid $secondary-bg;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  animation: Spin 1000ms ease infinite;
+}
+
+.portal--active {
+  height: 100vh;
+  width: 100vw;
+  background: black;
+  opacity: 0.4;
+}
+
+.portal {
+  display: none;
+}
+.main {
+  height: 100vh;
+}
+.game__board--container {
+  width: 600px;
+  height: 500px;
+  border: 3px solid black;
+  background: rgb(205, 205, 212);
+}
+.game__board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 2rem;
+  margin-left: 2rem;
+}
+.puzzle-piece {
+  margin: 5px;
+  border: 3px solid black;
+  width: 100px;
+  height: 100px;
+  color: rgba(245, 222, 179, 0);
+}
+.blue__field {
+  width: 100px;
+  height: 100px;
+  background: blue;
+}
+.red__field {
+  width: 100px;
+  height: 100px;
+  background: red;
+}
+.yellow__field {
+  width: 100px;
+  height: 100px;
+  background: yellow;
+}
+.green__field {
+  width: 100px;
+  height: 100px;
+  background: green;
+}
+.empty__field {
+  width: 100px;
+  height: 100px;
+}
+
+@keyframes Spin {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
+}
