@@ -54,17 +54,17 @@ export class Puzzle extends Component {
       2: 'yellow__field',
       3: 'yellow__field',
       4: 'yellow__field',
-      5: 'green__field',
-      6: 'green__field',
-      7: 'green__field',
-      8: 'red__field',
+      5: 'blue__field',
+      6: 'blue__field',
+      7: 'blue__field',
+      8: 'blue__field',
       9: 'red__field',
       10: 'red__field',
       11: 'red__field',
-      12: 'blue__field',
-      13: 'blue__field',
-      14: 'blue__field',
-      15: 'blue__field',
+      12: 'red__field',
+      13: 'green__field',
+      14: 'green__field',
+      15: 'green__field',
     };
 
     for (let i = 0; i < size; i++) {
@@ -96,8 +96,6 @@ export class Puzzle extends Component {
 
   checkWin(puzzle, node) {
     node = document.querySelector('.progress__bar');
-    let isFristResultCorrect = false;
-    let isSecondResultCorrect = false;
 
     const firstResult =
       puzzle[0][0] === 1 &&
@@ -106,15 +104,15 @@ export class Puzzle extends Component {
       puzzle[3][0] === 4;
 
     const secondResult =
-      puzzle[0][1] === 8 &&
-      puzzle[1][1] === 9 &&
-      puzzle[2][1] === 10 &&
-      puzzle[3][1] === 11;
+      puzzle[0][1] === 5 &&
+      puzzle[1][1] === 6 &&
+      puzzle[2][1] === 7 &&
+      puzzle[3][1] === 8;
     const thirdResult =
-      puzzle[0][2] === 12 &&
-      puzzle[0][2] === 13 &&
-      puzzle[0][2] === 14 &&
-      puzzle[0][2] === 15;
+      puzzle[0][2] === 9 &&
+      puzzle[0][2] === 10 &&
+      puzzle[0][2] === 11 &&
+      puzzle[0][2] === 12;
 
     if (firstResult) {
       node.classList.add('quater__bar');
