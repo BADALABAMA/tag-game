@@ -45,9 +45,27 @@ export class Puzzle extends Component {
   //     piece.classList.add(`empty__field`);
   //   });
   // }
-  renderPuzzle(puzzle, puzzleContainer, size) {
+
+  createPuzzle(puzzle, puzzleContainer, size, node) {
     puzzleContainer = document.querySelector('.game__board');
     puzzleContainer.innerHTML = '';
+    const colorMapping = {
+      1: 'yellow__field',
+      2: 'yellow__field',
+      3: 'yellow__field',
+      4: 'yellow__field',
+      5: 'green__field',
+      6: 'green__field',
+      7: 'green__field',
+      8: 'red__field',
+      9: 'red__field',
+      10: 'red__field',
+      11: 'red__field',
+      12: 'blue__field',
+      13: 'blue__field',
+      14: 'blue__field',
+      15: 'blue__field',
+    };
 
     for (let i = 0; i < size; i++) {
       for (let j = 0; j < size; j++) {
@@ -58,57 +76,16 @@ export class Puzzle extends Component {
         if (piece.textContent === '') {
           piece.classList.add('empty__field');
         }
-        if (piece.textContent === '1') {
-          piece.classList.add('red__field');
-        }
-        if (piece.textContent === '2') {
-          piece.classList.add('red__field');
-        }
-        if (piece.textContent === '3') {
-          piece.classList.add('red__field');
-        }
-        if (piece.textContent === '4') {
-          piece.classList.add('red__field');
-        }
-        if (piece.textContent === '5') {
-          piece.classList.add('green__field');
-        }
-        if (piece.textContent === '6') {
-          piece.classList.add('green__field');
-        }
-        if (piece.textContent === '7') {
-          piece.classList.add('green__field');
-        }
-        if (piece.textContent === '8') {
-          piece.classList.add('yellow__field');
-        }
-
-        if (piece.textContent === '9') {
-          piece.classList.add('yellow__field');
-        }
-        if (piece.textContent === '10') {
-          piece.classList.add('yellow__field');
-        }
-        if (piece.textContent === '11') {
-          piece.classList.add('yellow__field');
-        }
-        if (piece.textContent === '12') {
-          piece.classList.add('blue__field');
-        }
-        if (piece.textContent === '13') {
-          piece.classList.add('blue__field');
-        }
-        if (piece.textContent === '14') {
-          piece.classList.add('blue__field');
-        }
-        if (piece.textContent === '15') {
-          piece.classList.add('blue__field');
+        if (piece.textContent === '') {
+          piece.classList.add('empty__field');
+        } else {
+          piece.classList.add(colorMapping[piece.textContent]);
         }
 
         puzzleContainer.appendChild(piece);
         piece.addEventListener('click', () => {
           if (puzzle[i][j] !== 0) {
-            this.movePiece(i, j, puzzle, size);
+            this.movePiece(i, j, puzzle, size, node);
 
             console.log(puzzle);
           }
@@ -116,33 +93,56 @@ export class Puzzle extends Component {
       }
     }
   }
+  renderPuzzle(puzzle, puzzleContainer, size, node) {
+    this.createPuzzle(puzzle, puzzleContainer, size, node);
+  }
 
-  checkWin(puzzle) {
+  checkWin(puzzle, node) {
+    node = document.querySelector('.progress__bar');
+    let isFristResultCorrect = false;
+    let isSecondResultCorrect = false;
+
     const firstResult =
-      puzzle[0][1] === 5 && puzzle[0][2] === 6 && puzzle[0][3] === 7;
-    const secondResult =
       puzzle[0][0] === 1 &&
       puzzle[1][0] === 2 &&
       puzzle[2][0] === 3 &&
       puzzle[3][0] === 4;
 
+    const secondResult =
+      puzzle[0][1] === 8 &&
+      puzzle[1][1] === 9 &&
+      puzzle[2][1] === 10 &&
+      puzzle[3][1] === 11;
     const thirdResult =
-      puzzle[0][3] === 8 &&
-      puzzle[1][2] === 9 &&
-      puzzle[2][2] === 10 &&
-      puzzle[3][2] === 11;
+      puzzle[0][2] === 12 &&
+      puzzle[0][2] === 13 &&
+      puzzle[0][2] === 14 &&
+      puzzle[0][2] === 15;
+
     if (firstResult) {
-      return true;
-    } else if (secondResult) {
-      return true;
-    } else if (thirdResult) {
+      node.classList.add('quater__bar');
+      node.textContent = '35%';
+      isFristResultCorrect = true;
+    }
+
+    if (secondResult) {
+      node.classList.remove('quater__bar');
+      node.classList.add('half__bar');
+      node.textContent = '75%';
+      isSecondResultCorrect = true;
+    }
+
+    if (thirdResult && firstResult && secondResult) {
+      node.classList.remove('half__bar');
+      node.classList.add('full__bar');
+      node.textContent = '100%';
       return true;
     } else {
       return false;
     }
   }
 
-  movePiece(row, col, puzzle, size) {
+  movePiece(row, col, puzzle, size, node) {
     if (row > 0 && puzzle[row - 1][col] === 0) {
       [puzzle[row][col], puzzle[row - 1][col]] = [
         puzzle[row - 1][col],
@@ -167,15 +167,15 @@ export class Puzzle extends Component {
 
     this.renderPuzzle(puzzle, this.puzzleContainer, size);
 
-    if (this.checkWin(puzzle, row, col)) {
-      alert('congrats you are win!');
+    if (this.checkWin(puzzle, node)) {
+      return alert('congrats you are win!');
     }
   }
-  init(size, puzzleContainer) {
+  init(size, puzzleContainer, node) {
     this.puzzle = this.createEmptyPuzzle(size);
 
     this.shufflePuzzle(this.puzzle, size);
 
-    this.renderPuzzle(this.puzzle, puzzleContainer, size);
+    this.renderPuzzle(this.puzzle, puzzleContainer, size, node);
   }
 }

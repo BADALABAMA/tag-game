@@ -5,7 +5,19 @@ import { Main } from './Main';
 import { Board } from './Board';
 import { Container } from './Container';
 import { Field } from './Field';
-import { Spinner } from './Spinner';
+import { ProgressBarContainer } from './ProgressBarContainer';
 import { Puzzle } from './Puzzle';
+import { ProgressBar } from './ProgressBar';
 
-export { App, Header, Footer, Main, Board, Container, Field, Spinner, Puzzle };
+export {
+  App,
+  Header,
+  Footer,
+  Main,
+  Board,
+  Container,
+  Field,
+  ProgressBarContainer,
+  Puzzle,
+  ProgressBar,
+};

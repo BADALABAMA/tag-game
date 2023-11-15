@@ -8,34 +8,48 @@
 
 body {
   height: 100vh;
-  background: $primary-bg;
+  background: red;
 }
 
-.spinner {
-  width: 10rem;
+.header {
+  width: 100%;
   height: 10rem;
-  border-radius: 50%;
-  background: linear-gradient($primary-bg, $secondary-bg, $third-bg);
-  border: 2px solid $secondary-bg;
-  position: absolute;
-  transform: translate(-50%, -50%);
-  top: 50%;
-  left: 50%;
-  animation: Spin 1000ms ease infinite;
+  display: flex;
+  justify-content: center;
+}
+.progress__bar--container {
+  display: flex;
+  margin: 1rem;
+  width: 30rem;
+  height: 5rem;
+  background: rgba(155, 155, 155, 0.578);
+}
+.puzzle-piece {
+  transition: transform 0.3s ease-in-out;
+}
+.progress__bar,
+.quater__bar,
+.half__bar,
+.full__bar {
+  font-family: 'Courier New', Courier, monospace;
+  color: black;
+  background: green;
+}
+.quater__bar {
+  width: 10rem;
+}
+.half__bar {
+  width: 20rem;
 }
 
-.portal--active {
-  height: 100vh;
-  width: 100vw;
-  background: black;
-  opacity: 0.4;
+.full__bar {
+  width: 30rem;
 }
 
-.portal {
-  display: none;
-}
 .main {
   height: 100vh;
+  display: flex;
+  justify-content: center;
 }
 .game__board--container {
   width: 600px;
@@ -54,7 +68,7 @@ body {
   border: 3px solid black;
   width: 100px;
   height: 100px;
-  color: rgba(245, 222, 179, 0);
+  color: rgba(245, 222, 179, 0.977);
 }
 .blue__field {
   width: 100px;
@@ -79,13 +93,4 @@ body {
 .empty__field {
   width: 100px;
   height: 100px;
-}
-
-@keyframes Spin {
-  from {
-    opacity: 0.6;
-  }
-  to {
-    opacity: 1;
-  }
 }
