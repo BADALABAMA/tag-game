@@ -75,9 +75,6 @@ export class Puzzle extends Component {
 
         if (piece.textContent === '') {
           piece.classList.add('empty__field');
-        }
-        if (piece.textContent === '') {
-          piece.classList.add('empty__field');
         } else {
           piece.classList.add(colorMapping[piece.textContent]);
         }
